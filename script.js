@@ -1,16 +1,21 @@
 let allMovies = [];
+var title;
+var rating;
+var haveWatched;
 
 //Define a movie class with parameters title (string), rating (number) and haveWatched (boolean)
-function Movie (title, rating, havewatched) {
-    return {title:title, rating:rating, haveWatched:havewatched};
+class Movie {
+    constructor(title, rating, haveWatched) {
+        this.title = title;
+        this.rating = rating;
+        this.haveWatched = haveWatched;
+    }
 }
 
 //add a movie OBJECT to the allMovies array
 let addMovie = (movie) => {
     console.log("A new movie is added");
-        allMovies.length++;
-        allMovies[allMovies.length - 1] = movie;
-
+    allMovies.push(movie);
 }
 
 //iterate through all elements of allMovies array
@@ -18,7 +23,6 @@ let addMovie = (movie) => {
 //print out the total number of movies in allMovies array
 let printMovies = () => {
     let output = "Printing all movies...\n";
-
     for (let i = 0; i < allMovies.length; i++) {
             let m = allMovies[i];
             output += ("" + m.title + ", rating of " + m.rating + ", havewatched: " + m.haveWatched + "\n");
@@ -31,24 +35,22 @@ let printMovies = () => {
 //print out to console, only the movies that has a rating higher than rating(argument)
 //print out the total number of matches
 let highRatings = (rating) => {
- let output = "printing movie that has a rating higher than " + rating + "\n";
-        let match = 0;
-
-        for (let i = 0; i < allMovies.length; i++) {
-
-                let m = allMovies[i];
-
-                if (m.rating >= rating) {
-                        output += ("" + m.title + ", rating of " + m.rating + ", havewatched: " + m.haveWatched + "\n");
-                        match++;
-                }
-}   output += ("\nIn total, there are " + match + " matches\n");
-console.log(output);
+    console.log("Printing movie that has a rating higher than " + rating);
+    let match = 0;
+    for (let i = 0; i < allMovies.length; i++) {
+        if (allMovies[i].rating >= rating) {
+            console.log(allMovies[i].title + " has a rating of " + allMovies[i].rating);
+            match++;
+        }
+    }
+    console.log(" ");
+    console.log("In total, there are " + match + " matches")
 }
 
 
 //Toggle the 'haveWatched' property of the specified movie 
 let changeWatched = (title) => {
+    console.log("Changing the status of the movie...");
     console.log("changing the status of the movie...");
 
     for (let i = 0; i <allMovies.length; i++) {
@@ -57,28 +59,9 @@ let changeWatched = (title) => {
 
             if (m.title == title) {
                     m.haveWatched = !m.haveWatched;
-            }
+        }
+    }
 }
-} 
-console.log("running program...");
-
-addMovie(Movie("Spiderman", 3, true));
-addMovie(Movie("Citizen Kane", 4, false));
-addMovie(Movie("Zootopia", 4.5, true));
-
-printMovies();
-
-addMovie(Movie("Parasite", 2, false));
-changeWatched("Spiderman");
-
-printMovies();
-
-changeWatched("Spiderman");
-
-printMovies();
-
-highRatings(3.5);
-
 
 
 
